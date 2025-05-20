@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seating Chart Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav>
+    <button onclick="showPage('seating-charts')">Seating Charts</button>
+    <button onclick="showPage('rosters')">Rosters</button>
+    <button onclick="showPage('preferences')">Preferences</button>
+  </nav>
+
+  <main>
+    <section id="seating-charts" class="page">
+      <h2>Seating Charts</h2>
+      <button onclick="generateSeatingChart()">Generate New Random Chart</button>
+      <div id="chart-container"></div>
+    </section>
+
+    <section id="rosters" class="page" style="display: none;">
+      <h2>Rosters</h2>
+      <input type="file" id="csvInput" accept=".csv" />
+      <div id="roster-table" class="config-table"></div>
+      <button onclick="saveRoster()">Save Roster</button>
+      <button onclick="undoRosterChanges()">Undo Changes</button>
+    </section>
+
+    <section id="preferences" class="page" style="display: none;">
+      <div id="preferences-config">
+		  <h2>Preferences</h2>
+		  <label>
+			Tables (number):
+			<input type="number" id="numTables" value="4" min="1" />
+		  </label>
+		  <label>
+			Students per Table:
+			<input type="number" id="studentsPerTable" value="4" min="1" />
+		  </label>
+		  <button onclick="savePreferences()">Save Preferences</button>
+	  </div>
+	  <div id="classroom-config" class="config-table">
+	  </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
