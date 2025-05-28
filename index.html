@@ -1,51 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seating Chart Tool</title>
-  <link rel="stylesheet" href="styles.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Seating Chart Tool</title>
+	<link rel="stylesheet" href="styles.css" />
+	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
-  <nav>
-    <button onclick="showPage('seating-charts')">Seating Charts</button>
-    <button onclick="showPage('rosters')">Rosters</button>
-    <button onclick="showPage('preferences')">Preferences</button>
-  </nav>
+	<nav>
+		<button onclick="showPage('seating-charts')">Seating Charts</button>
+		<button onclick="showPage('rosters')">Rosters</button>
+		<button onclick="showPage('preferences')">Preferences</button>
+	</nav>
 
-  <main>
-    <section id="seating-charts" class="page">
-      <h2>Seating Charts</h2>
-      <button onclick="generateSeatingChart()">Generate New Random Chart</button>
-      <div id="chart-container"></div>
-    </section>
+	<main>
+		<section id="seating-charts" class="page">
+			<h2>Seating Charts</h2>
+			<div class="seating-chart-config">
+			<button onclick="generateSeatingChart()">Generate New Random Chart</button>
+			<div name="roster-selector" class="toolbar"></div>
+		</div>
+			<div id="chart-container"></div>
+		<div class="toolbar">
+			<button onclick="downloadChartImage()">Download Chart as Image</button>
+		</div>
 
-    <section id="rosters" class="page" style="display: none;">
-      <h2>Rosters</h2>
-      <input type="file" id="csvInput" accept=".csv" />
-      <div id="roster-table" class="config-table"></div>
-      <button onclick="saveRoster()">Save Roster</button>
-      <button onclick="undoRosterChanges()">Undo Changes</button>
-    </section>
+		</section>
 
-    <section id="preferences" class="page" style="display: none;">
-      <div id="preferences-config">
-		  <h2>Preferences</h2>
-		  <label>
+		<section id="rosters" class="page" style="display: none;">
+			<h2>Rosters</h2>
+		<div name="roster-selector" class="toolbar"></div>
+			<input type="file" id="csvInput" accept=".csv" />
+			<div id="roster-table" class="config-table"></div>
+			<button onclick="saveRoster()">Save Roster</button>
+			<button onclick="undoRosterChanges()">Undo Changes</button>
+		<button onclick="addRosterRow()">Add Row</button>
+		<button onclick="addRosterColumn()">Add Column</button>
+
+		
+		</section>
+
+		<section id="preferences" class="page" style="display: none;">
+			<div id="preferences-config">
+			<h2>Preferences</h2>
+			<label>
 			Tables (number):
 			<input type="number" id="numTables" value="4" min="1" />
-		  </label>
-		  <label>
+			</label>
+			<label>
 			Students per Table:
 			<input type="number" id="studentsPerTable" value="4" min="1" />
-		  </label>
-		  <button onclick="savePreferences()">Save Preferences</button>
-	  </div>
-	  <div id="classroom-config" class="config-table">
-	  </div>
-    </section>
-  </main>
+			</label>
+			<label>
+			Minimum Students per Table:
+			<input type="number" id="minStudentsPerTable" value="3" min="1" />
+			</label>
+			<button onclick="savePreferences()">Save Preferences</button>
+		</div>
+		<div>
+			<div id="classroom-config" class="config-table"></div>
+			<button onclick="renderTablePreferences('reset')" id="roster-table-reset">Reset Table</button>
+		</div>
+		</section>
+	</main>
 
-  <script src="app.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>
